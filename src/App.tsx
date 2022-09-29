@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import AppToolBar from './components/AppToolBar/component';
+import TemplatePicker from './components/TemplatePicker/component';
+import MainContainer from './components/MainContainer/component';
+import { Context, initialContext } from './context/store';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Context.Provider value={initialContext}>
+        <AppToolBar></AppToolBar>
+        <MainContainer>
+          <TemplatePicker></TemplatePicker>
+        </MainContainer>
+      </Context.Provider>
+
+
     </div>
   );
 }

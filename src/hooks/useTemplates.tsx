@@ -28,7 +28,8 @@ export interface ITemplateNode extends INodeBase
 
 export interface IUseTemplatesStore
 {
-    loadFromDirectory : Function,
+    getNodes : Function;
+    loadFromDirectory : Function;
 }
 
 export const useTemplatesStore = () : IUseTemplatesStore =>
@@ -36,15 +37,20 @@ export const useTemplatesStore = () : IUseTemplatesStore =>
     const targetExtensions = ["txt", "tsx", "js"];
     const [nodes, setNodes] = useState([] as INodeBase[]);
 
+    const getNodes  = () : Array<INodeBase> =>
+    {
+        return nodes;
+    }
+
     /**
      * 
      * @param handle 
      */
     const loadFromDirectory = async (handle : FileSystemDirectoryHandle) => 
     {
-        await scanDirectory(handle, null, nodes);
-
-        console.log(nodes);
+        const _nodes : Array<INodeBase> = [];
+        await scanDirectory(handle, null, _nodes);
+        setNodes(_nodes);
     }
 
     /**
@@ -124,6 +130,7 @@ export const useTemplatesStore = () : IUseTemplatesStore =>
     }
 
     return {
+        getNodes : getNodes,
         loadFromDirectory: loadFromDirectory,
     }
 };

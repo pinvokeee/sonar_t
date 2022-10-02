@@ -15,7 +15,7 @@ export const AppContainer = () =>
         <>
         <AppToolBar useDirecotryHandleStore={chook_dirctoryHandle} useTemplatesStore={chook_useTemplatesStore}></AppToolBar>
         <MainContainer>
-            <TemplatePicker></TemplatePicker>
+            <TemplatePicker useTemplatesStore={chook_useTemplatesStore}></TemplatePicker>
         </MainContainer>
         </>
     );
